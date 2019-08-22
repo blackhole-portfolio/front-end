@@ -59,7 +59,34 @@ export const getUsers = () => dispatch => {
 
 export const LOGOUT = 'LOGOUT';
 
-export const logout = () = dispatch => {
+export const logout = () => dispatch => {
     dispatch({ type: LOGOUT });
     localStorage.clear();
 }
+
+// Fetch Data axios call
+
+export const FETCH_DATA_START = 'FETCH_DATA_START';
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
+
+export const USER_UNAUTHORIZED = 'FETCH_DATA_FAILURE';
+
+export const getData = (user_id) => dispatch => {
+    dispatch({ type: FETCH_DATA_START });
+
+    axios
+    .get(`https://blackhole-backend.herokuapp.com/messages/users/${user_id}`, {
+        headers: { Authorization: localStorage.getItem('token') }
+    })
+    .then( res => {
+        dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data});
+    })
+    .catch( err => {
+        if (err.response.status === 403) {
+            dispatch({ type: USER_UNAUTHORIZED, payload: err.response});
+        } else {
+            dispatch({ type: DELETE_FAILURE, payload: err.response});
+        }
+    });
+};
