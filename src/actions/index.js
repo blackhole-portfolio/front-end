@@ -105,4 +105,24 @@ export const addNote = newNote => dispatch => {
       dispatch({ type: ADD_SUCCESS, payload: res.data })
     })
     .catch(err => console.log(err));
-}
+};
+
+// Delete Note axios call
+
+export const DELETE_START = "DELETE_START";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
+export const DELETE_FAILURE = "DELETE_FAILURE";
+
+export const deleteNotes = id => dispatch => {
+  dispatch({ type: DELETE_START });
+  axios
+    .delete(` https://blackhole-backend.herokuapp.com/delmessage/${id}`, {
+      headers: { Authorization: localStorage.getItem("token") }
+    })
+    .then(res => {
+      dispatch({ type: DELETE_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log('This is an error', err);
+    });
+};
