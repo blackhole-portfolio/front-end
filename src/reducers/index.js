@@ -19,3 +19,20 @@ import {
     EDIT_START        ,
     EDIT_SUCCESS
 } from '../actions/index';
+
+const initialState = {
+    notes: [] ,
+    users: [] ,
+    loggedIn: false ,
+    loggingIn: false ,
+    registering: false ,
+    token: localStorage.getItem('token') ,
+    fetchingNotes: false ,
+    gettingUsers: false ,
+    addingNotes: false ,
+    updatingNotes: false ,
+    deletingNotes: false ,
+    error: null ,
+    errorStatusCode: null 
+};
+
