@@ -90,3 +90,19 @@ export const getData = (user_id) => dispatch => {
         }
     });
 };
+
+// Add Note axios call
+
+export const ADD_START = 'ADD_START';
+export const ADD_SUCCESS='ADD_SUCCESS';
+
+export const addNote = newNote => dispatch => {
+  dispatch({ type: ADD_START });
+
+  return axios
+    .post('https://blackhole-backend.herokuapp.com/postmessage', newNote)
+    .then(res => {
+      dispatch({ type: ADD_SUCCESS, payload: res.data })
+    })
+    .catch(err => console.log(err));
+}
