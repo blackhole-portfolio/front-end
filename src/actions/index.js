@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Login endpoint connection
+// Login axios call
 
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -18,4 +18,20 @@ export const login = creds => dispatch => {
             dispatch({ type: LOGIN_SUCCESS , payload: res.data.token })
 
         });
+};
+
+// Register axios call
+
+export const REG_START = 'REG_START';
+export const REG_SUCCESS = 'REG_SUCCESS';
+
+export const register = user => dispatch => {
+    dispatch({ type: REG_START });
+
+    axios.post("https://blackhole-backend.herokuapp.com/api/auth/register", user)
+        .then( res => {
+            dispatch({ type: REG_SUCCESS })
+            dispatch(getUsers());
+        })
+        .catch( err => console.log(err));
 };
