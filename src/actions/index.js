@@ -43,7 +43,7 @@ export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
 
 export const getUsers = () => dispatch => {
-    dispatch.({ type: GET_USERS_START });
+    dispatch({ type: GET_USERS_START });
     
     axios
         .get("https://blackhole-backend.herokuapp.com/users", {
@@ -54,3 +54,12 @@ export const getUsers = () => dispatch => {
         })
         .catch( err => console.log(err));
 };
+
+// Logout axios call 
+
+export const LOGOUT = 'LOGOUT';
+
+export const logout = () = dispatch => {
+    dispatch({ type: LOGOUT });
+    localStorage.clear();
+}
