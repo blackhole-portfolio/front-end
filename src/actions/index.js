@@ -126,3 +126,22 @@ export const deleteNotes = id => dispatch => {
       console.log('This is an error', err);
     });
 };
+
+// Edit Notes axios call
+
+export const EDIT_START = 'EDIT_START';
+export const EDIT_SUCCESS='EDIT_SUCCESS';
+
+export const updateNotes = note => dispatch => {
+  dispatch({ type: EDIT_START });
+  axios
+    .put(`https://blackhole-backend.herokuapp.com/updatemessage/${note.id}`, note, {
+      headers: { Authorization: localStorage.getItem("token") }
+    })
+    .then(res => {
+      dispatch({ type: EDIT_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err.response);
+    });
+};
