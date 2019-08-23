@@ -39,4 +39,15 @@ class Notes extends React.Component {
             this.props.history.push('/main-page')
         }, 400)
     }
+
+    // Animation properties
+    handleAnimate = (id) => {
+        this.setState(prevState => ({
+            animate: !prevState.animate
+        }));
+
+    setTimeout( () => { this.props.deleteNotes(id); }, 3000)
+
+    setTimeout( () => { this.props.history.push('/main-page') }, 3200)
+    };
 };
