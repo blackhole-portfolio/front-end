@@ -11,7 +11,8 @@ import MainPage from "./components/MainPage";
 import Notes from "./components/Notes";
 import NoteForm from "./components/NoteForm";
 
-import { connect } from 'react-redux';import React from 'react';
+import { connect } from 'react-redux';
+
 
 class App extends React.Component {
   render() {
